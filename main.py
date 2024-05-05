@@ -5,7 +5,7 @@ import pytesseract
 import google.generativeai as genai
 
 genai.configure(api_key=API_KEY)
-pytesseract.pytesseract.tesseract_cmd = 'C:\Program Files\Tesseract-OCR/tesseract.exe'  # donwload tesseract.exe and attach your path
+pytesseract.pytesseract.tesseract_cmd = 'C:\Program Files\Tesseract-OCR/tesseract.exe'  # your path may be different
 
 generation_config = {
   "temperature": 1,
@@ -33,11 +33,18 @@ safety_settings = [
   },
 ]
 
-content = pytesseract.image_to_string(Image.open(input('Path')))
+def text(num):
+    global content
+    content = ""
+    for i in range(num):
+        content += pytesseract.image_to_string(Image.open(input('Path')))
+
 
 model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest",
                               generation_config=generation_config,
                               safety_settings=safety_settings)
+
+text(int(input()))
 
 response = model.generate_content("Summarize this (if can bullet points):" + f"""{content}""" +"If its a zoom screenshot ignore people and focus on the screen presented")
 print(response.text)
