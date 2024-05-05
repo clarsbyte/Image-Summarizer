@@ -2,7 +2,7 @@
 Uses Tesseract and Google's Gemini Pro to summarize text displayed in an image. 
 
 Here are the libraries you'll need to install:
-
+1. `pip install Pillow`
 1. `pip install -U google-generativeai` 
 
 You can visit Gemini Pro's documentation [here](https://ai.google.dev/gemini-api/docs/get-started/python)
